@@ -3,10 +3,10 @@ use crate::lexer;
 
 pub(crate) fn calc(s: &str) -> String {
     match lexer::new(s) {
-        Err(message) => message,
+        Err(message) => format!("Lexer error: {}\n", message),
         Ok(mut lexer) => match expr(&mut lexer) {
-            Ok(val) => val.to_string(),
-            Err(message) => message,
+            Ok(val) => format!("ans = {}\n", val),
+            Err(message) => format!("Parser error: {}\n", message),
         },
     }
 }

@@ -31,7 +31,7 @@ fn main() {
             continue;
         }
         output
-            .write_all(format!("ans = {}\n", calc(line)).as_ref())
+            .write_all(calc(line).as_ref())
             .unwrap();
     }
 }

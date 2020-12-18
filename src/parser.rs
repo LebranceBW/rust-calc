@@ -13,7 +13,7 @@ pub(crate) fn calc(s: &str) -> String {
 
 fn expr(lexer: &mut Lexer) -> Result<f32, String> {
     let mut addend = term(lexer)?;
-    while let Some(token) = lexer.pop() {
+    while let Some(token) = lexer.pop_front() {
         match token {
             Token::Operator(Op::Add) => {
                 addend += term(lexer)?;
@@ -22,7 +22,7 @@ fn expr(lexer: &mut Lexer) -> Result<f32, String> {
                 addend -= term(lexer)?;
             }
             Token::RightBracket => {
-                lexer.push(token);
+                lexer.push_front(token);
                 break;
             }
             _ => {
@@ -35,7 +35,7 @@ fn expr(lexer: &mut Lexer) -> Result<f32, String> {
 
 fn term(lexer: &mut Lexer) -> Result<f32, String> {
     let mut factor = unit(lexer)?;
-    while let Some(token) = lexer.pop() {
+    while let Some(token) = lexer.pop_front() {
         match token {
             Token::Operator(Op::Mul) => {
                 factor *= unit(lexer)?;
@@ -44,7 +44,7 @@ fn term(lexer: &mut Lexer) -> Result<f32, String> {
                 factor /= unit(lexer)?;
             }
             _ => {
-                lexer.push(token);
+                lexer.push_front(token);
                 break;
             }
         }
@@ -53,12 +53,12 @@ fn term(lexer: &mut Lexer) -> Result<f32, String> {
 }
 
 fn unit(lexer: &mut Lexer) -> Result<f32, String> {
-    match lexer.pop() {
+    match lexer.pop_front() {
         Some(token) => match token {
             Token::Number(val) => Ok(val),
             Token::LeftBracket => {
                 let val = expr(lexer)?;
-                match lexer.pop() {
+                match lexer.pop_front() {
                     Some(Token::RightBracket) => {}
                     _ => return Err(String::from("Mismatched bracket")),
                 }

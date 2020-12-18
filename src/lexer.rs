@@ -1,5 +1,6 @@
 use std::iter::{Fuse, Peekable};
 use std::str::Chars;
+use std::collections::VecDeque;
 
 #[derive(Debug, Clone)]
 pub enum Token {
@@ -40,11 +41,11 @@ impl<'a> CharStream<'a> {
     }
 }
 
-pub(crate) type Lexer = Vec<Token>;
+pub(crate) type Lexer = VecDeque<Token>;
 
 pub fn new(s: &str) -> Result<Lexer, String> {
     let mut stream = CharStream::new(s);
-    let mut tokens = vec![];
+    let mut tokens = VecDeque::new();
     loop {
         let c = stream.peek();
         if c == '\0' {
@@ -54,7 +55,7 @@ pub fn new(s: &str) -> Result<Lexer, String> {
             continue;
         } else {
             let token = parse_token(&mut stream)?;
-            tokens.push(token);
+            tokens.push_back(token);
         }
     }
     Ok(tokens)

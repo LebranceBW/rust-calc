@@ -23,7 +23,7 @@ fn main() {
         }
 
         if line == &"whosyourdaddy" {
-            printbanner();
+            print_banner();
             continue;
         }
 
@@ -36,7 +36,7 @@ fn main() {
     }
 }
 
-fn printbanner() {
+fn print_banner() {
     print!(
         r#"
   _____      _            _       _

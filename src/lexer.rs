@@ -62,7 +62,7 @@ pub fn new(s: &str) -> Result<Lexer, String> {
 }
 
 fn parse_token(stream: &mut CharStream) -> Result<Token, String> {
-    const DIGITS: &'static str = "0123456789.-";
+    const DIGITS: &'static str = "0123456789.";
     const SYMBOLS: &'static str = "+-*/";
     let mut ch = stream.peek();
     if DIGITS.contains(ch) {
@@ -74,7 +74,7 @@ fn parse_token(stream: &mut CharStream) -> Result<Token, String> {
         }
         match buffer.parse::<f32>() {
             Ok(val) => Ok(Token::Number(val)),
-            Err(_) => Err(format!("Parse Error. {}", buffer)),
+            Err(_) => Err(format!("Invalid Token. {}", buffer)),
         }
     } else if SYMBOLS.contains(ch) {
         stream.next();

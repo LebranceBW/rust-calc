@@ -55,6 +55,12 @@ fn term(lexer: &mut Lexer) -> Result<f32, String> {
 fn unit(lexer: &mut Lexer) -> Result<f32, String> {
     match lexer.pop_front() {
         Some(token) => match token {
+            Token::Operator(Op::Sub) => {
+                Ok(-unit(lexer)?)
+            }
+            Token::Operator(Op::Add) => {
+                Ok(unit(lexer)?)
+            }
             Token::Number(val) => Ok(val),
             Token::LeftBracket => {
                 let val = expr(lexer)?;
@@ -66,7 +72,8 @@ fn unit(lexer: &mut Lexer) -> Result<f32, String> {
             }
             _ => Err(format!("Invalid Token: {:?}", token)),
         },
-        _ => Ok(0.0f32),
+        // _ => Ok(0.0f32),
+        _ => Err(format!("Empty")),
     }
 }
 

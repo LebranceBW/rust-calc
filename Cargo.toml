@@ -1,0 +1,9 @@
+[package]
+name = "rust-calc"
+version = "1.0"
+authors = ["LebranceBW <LebranceBW@foxmail.com>"]
+edition = "2020"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]

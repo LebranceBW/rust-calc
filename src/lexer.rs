@@ -62,8 +62,8 @@ pub fn new(s: &str) -> Result<Lexer, String> {
 }
 
 fn parse_token(stream: &mut CharStream) -> Result<Token, String> {
-    const DIGITS: &'static str = "0123456789.";
-    const SYMBOLS: &'static str = "+-*/";
+    const DIGITS: &str = "0123456789.";
+    const SYMBOLS: &str = "+-*/";
     let mut ch = stream.peek();
     if DIGITS.contains(ch) {
         let mut buffer: String = String::new();

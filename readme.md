@@ -1,4 +1,6 @@
 # Rust交互式四则计算器
+![](https://img.shields.io/badge/LICENSE-MIT-brightgreen)
+![](https://rust-reportcard.xuri.me/badge/github.com/LebranceBW/rust-calc)
 通过cargo包管理器写的。运行需要rust环境。
 ```bash
     git clone https://github.com/LebranceBW/rust-calc.git

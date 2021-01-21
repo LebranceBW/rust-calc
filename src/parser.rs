@@ -72,8 +72,7 @@ fn unit(lexer: &mut Lexer) -> Result<f32, String> {
             }
             _ => Err(format!("Invalid Token: {:?}", token)),
         },
-        // _ => Ok(0.0f32),
-        _ => Err(format!("Empty")),
+        _ => Err("Empty".to_string()),
     }
 }
 

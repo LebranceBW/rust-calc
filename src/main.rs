@@ -5,6 +5,7 @@ use parser::calc;
 
 mod lexer;
 mod parser;
+mod test;
 
 fn main() {
     let exit_cmd = vec!["exit", "quit", "q"];
